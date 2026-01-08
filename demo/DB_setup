@@ -1,0 +1,57 @@
+USE master
+
+-- Force drop the database
+IF DB_ID('HandballDB') IS NOT NULL
+BEGIN
+    -- Kill all active connections to HandballDB
+    DECLARE @kill_commands NVARCHAR(MAX) = '';
+    SELECT @kill_commands = @kill_commands + 'KILL ' + CAST(session_id AS NVARCHAR(10)) + ';'
+    FROM sys.dm_exec_sessions 
+    WHERE database_id = DB_ID('HandballDB');
+
+    EXEC sp_executesql @kill_commands;
+    
+    -- Now drop the database
+    DROP DATABASE HandballDB;
+END
+GO
+
+-- wait to ensure cleanup
+waitfor delay '00:00:01';
+go
+
+-- INV: DB findes ikke
+CREATE DATABASE HandballDB;
+GO -- gør alt hertil, inden vi går videre
+
+-- skifter til DB, så vi kan udføre sql-sætninger på den.
+USE HandballDB;
+
+CREATE TABLE team (
+id int IDENTITY(0,1) NOT NULL PRIMARY KEY,
+team nvarchar(50) NOT NULL,
+point int
+);
+
+--INSERT INTO hold VALUES(
+--'');
+
+CREATE TABLE "match" (
+id int IDENTITY (0,1) NOT NULL PRIMARY KEY,
+holdID1 int FOREIGN KEY references team(id),
+holdID2 int FOREIGN KEY references team(id)
+);
+
+CREATE TABLE goal(
+id int IDENTITY(0,1) NOT NULL PRIMARY KEY,
+holdID int FOREIGN KEY references team(id),
+tidspunkt time,
+kampID int FOREIGN KEY references "match"(id)
+);
+
+CREATE TABLE penalty(
+id int IDENTITY(0,1) NOT NULL PRIMARY KEY,
+holdID int FOREIGN KEY references team(id),
+tidspunkt time,
+kampID int FOREIGN KEY references "match"(id)
+);
