@@ -1,7 +1,9 @@
 package com.example.entities;
 
 public class Timestamp {
-    private String timestamp;
+
+    //final fordi vi sætter timestamp en gang og aldrig ændrer den efterfølgende.
+    private final String timestamp;
 
     //Constructor
     public Timestamp(Timer timer){
