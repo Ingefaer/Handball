@@ -2,6 +2,7 @@ package com.example.data;
 
 import com.example.entities.*;
 
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -34,18 +35,14 @@ public class DataLayer {
   }
 
     private boolean openConnection(String databaseName) {
-    String connectionString =
-        "jdbc:sqlserver://localhost:1433;" +
-        "databaseName=" + databaseName + ";" +
-        "user=;" +  // Default SQL Server Docker username
-        "password=;" +  // Your Docker SQL Server password
-        "trustServerCertificate=true;";
+        String connectionString =
+                "jdbc:sqlserver://localhost:1433;" +
+                        "instanceName=SQLEXPRESS;" +
+                        "databaseName=" + databaseName + ";" +
+                        "integratedSecurity=true;" +
+                        "trustServerCertificate=true";
 
-    System.out.println(connectionString);
-    
-    // Rest of your code remains the same...
-
-    connection = null;
+        connection = null;
 
     try {
       System.out.println("Connecting to database...");
@@ -65,9 +62,115 @@ public class DataLayer {
   }
 
     /*
+     * Create operationer
+     */
+    public boolean insertTeam(Team team) {
+        try {
+            String sql = "INSERT INTO team VALUES (?,?)";
+                    /*'"
+                    + student.getLastName() + "', '"
+                    + student.getFirstName() + "', '"
+                    + student.getSemesterNo()+"')";*/
+
+            System.out.println(sql);
+
+            // get statement object
+            //Statement statement = connection.createStatement();
+            PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, team.getTeamName());
+            statement.setInt(2, team.getTeamPoint());
+
+
+            // execute sql statement
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows != 1)
+                return false;
+
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                team.setTeamID(resultSet.getInt(1));
+            }
+
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    } //Testet og virker
+
+        public boolean insertMatch(Match match) {
+            try {
+                String sql = "INSERT INTO match VALUES (?,?)";
+                    /*'"
+                    + student.getLastName() + "', '"
+                    + student.getFirstName() + "', '"
+                    + student.getSemesterNo()+"')";*/
+
+                System.out.println(sql);
+
+                // get statement object
+                //Statement statement = connection.createStatement();
+                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                statement.setInt(1, match.getTeam1ID());
+                statement.setInt(2, match.getTeam2ID());
+
+
+                // execute sql statement
+                int affectedRows = statement.executeUpdate();
+
+                if (affectedRows != 1)
+                    return false;
+
+                ResultSet resultSet = statement.getGeneratedKeys();
+                if (resultSet.next()) {
+                    match.setMatchID(resultSet.getInt(1));
+                }
+
+                return true;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+    /*
    * Read operationer
-   * To-do tilføj read af drikkevarer og Salg og brand
    */
+
+    public ArrayList<Team> getTeamByWhereClause(String whereClause) {
+        ArrayList<Team> teams = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM team WHERE " + whereClause;
+
+            System.out.println(sql);
+
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            // iteration starter 'before first'
+            while (resultSet.next()) {
+                // hent data fra denne række
+                int id = resultSet.getInt("id");
+                String teamName = resultSet.getString("team");
+                int point = resultSet.getInt("point");
+
+                Team team = new Team(id, teamName, point);
+
+                teams.add(team);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return teams;
+    }
+
+    //********************************* dont need **********************************
   public ArrayList<Customer> getAllCustomers() {
     return getCustomersByWhereClause("0=0");
   }
@@ -117,93 +220,7 @@ public class DataLayer {
   }
 
   /*
-   * Create operationer
-   * To-do tilføj read af drikkevarer og Salg og brand
-   */
-  public void insertCustomer(Customer customer) {
-    try {
-      String sql = "INSERT INTO customer VALUES ('" +
-        customer.getLastName() + "', '" +
-        customer.getFirstName() + "', " +
-        customer.getNickName() + ")";
-
-      System.out.println(sql);
-
-      // get statement object
-      Statement statement = connection.createStatement();
-
-      // execute sql statement
-      int affectedRows = statement.executeUpdate(sql);
-
-      // ToDo: check at affectedRows er 1
-
-      /*
-       * get (possible) auto-generated key if INSERT-statement
-       */
-      ResultSet resultSet = statement.executeQuery("SELECT SCOPE_IDENTITY()");
-
-      if (resultSet.next())
-        customer.setId(resultSet.getInt(1));
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
-
-  /*public void insertBeverage(Beverage beverage) {
-    try {
-      String sql = "INSERT INTO beverage (brandID, name, deposit) VALUES ('" +
-        beverage.getBrandID() + "', '" +
-        beverage.getName() + "', " +
-        beverage.getDeposit() + ")";
-
-      System.out.println(sql);
-
-      // get statement object
-      Statement statement = connection.createStatement();
-
-      // execute sql statement
-      int affectedRows = statement.executeUpdate(sql);
-
-      // ToDo: check at affectedRows er 1
-
-      //get (possible) auto-generated key if INSERT-statement - tilfæjer id til java objekt
-      ResultSet resultSet = statement.executeQuery("SELECT SCOPE_IDENTITY()");
-
-      if (resultSet.next())
-        beverage.setId(resultSet.getInt(1));
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }*/
-
-  /*
-   * Delete operationer
-   * To-do tilføj read af drikkevarer og Salg og brand
-   */
-  public void deleteCustomer(Customer customer) {
-    try {
-      String sql = "DELETE FROM customer WHERE id=" + customer.getId();
-
-      System.out.println(sql);
-
-      // get statement object
-      Statement statement = connection.createStatement();
-
-      // execute sql statement
-      int affectedRows = statement.executeUpdate(sql);
-
-      // ToDo: check at affectedRows er 1
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
-  }
-
-  /*
    * Update operationer
-   * To-do tilføj read af drikkevarer og Salg og brand
    */
   public void updateCustomer(Customer customer) {
     try {
@@ -227,4 +244,26 @@ public class DataLayer {
       e.printStackTrace();
     }
   }
+
+    /*
+     * Delete operationer
+     */
+    public void deleteCustomer(Customer customer) {
+        try {
+            String sql = "DELETE FROM customer WHERE id=" + customer.getId();
+
+            System.out.println(sql);
+
+            // get statement object
+            Statement statement = connection.createStatement();
+
+            // execute sql statement
+            int affectedRows = statement.executeUpdate(sql);
+
+            // ToDo: check at affectedRows er 1
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

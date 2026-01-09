@@ -16,13 +16,13 @@ public class Team {
         this(0,teamName,point);
     }
     //Get
-    public int getId() {
+    public int getTeamID() {
         return id;
     }
     public String getTeamName() {
         return teamName;
     }
-    public int getPoint() {
+    public int getTeamPoint() {
         return point;
     }
 
@@ -32,6 +32,10 @@ public class Team {
     }
     public void setPoint(int point) {
         this.point = point;
+    }
+
+    public void setTeamID(int id) {
+        this.id = id;
     }
 
     //toString

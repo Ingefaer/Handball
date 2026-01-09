@@ -12,4 +12,19 @@ public class MenuController {
     private void switchToSelectTeam() throws IOException {
         App.setRoot("selectTeam");
     }
+
+    @FXML
+    private void switchToTeamAdmin() throws IOException {
+        App.setRoot("teamAdmin");
+    }
+
+    @FXML
+    private void switchToSelectReport() throws IOException {
+        App.setRoot("selectReport");
+    }
+
+    @FXML
+    private void switchToLeague() throws IOException {
+        App.setRoot("league");
+    }
 }

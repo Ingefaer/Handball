@@ -17,17 +17,17 @@
             <Font size="38.0" />
          </font>
       </Button>
-      <Button fx:id="switchToAttendanceButton1" layoutX="560.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchToSelectTeam" prefHeight="54.0" prefWidth="160.0" text="Hold">
+      <Button fx:id="switchToAttendanceButton1" layoutX="560.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchToTeamAdmin" prefHeight="54.0" prefWidth="160.0" text="Hold">
          <font>
             <Font size="38.0" />
          </font>
       </Button>
-      <Button fx:id="switchToAttendanceButton11" layoutX="558.0" layoutY="412.0" mnemonicParsing="false" onAction="#switchToSelectTeam" prefHeight="70.0" prefWidth="200.0" text="Rapport">
+      <Button fx:id="switchToAttendanceButton11" layoutX="558.0" layoutY="412.0" mnemonicParsing="false" onAction="#switchToSelectReport" prefHeight="70.0" prefWidth="200.0" text="Rapport">
          <font>
             <Font size="38.0" />
          </font>
       </Button>
-      <Button fx:id="switchToAttendanceButton111" layoutX="557.0" layoutY="533.0" mnemonicParsing="false" onAction="#switchToSelectTeam" prefHeight="54.0" prefWidth="160.0" text="Liga">
+      <Button fx:id="switchToAttendanceButton111" layoutX="557.0" layoutY="533.0" mnemonicParsing="false" onAction="#switchToLeague" prefHeight="54.0" prefWidth="160.0" text="Liga">
          <font>
             <Font size="38.0" />
          </font>

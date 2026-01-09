@@ -1,15 +1,14 @@
 package com.example.presentation;
 
-import java.io.IOException;
-
 import com.example.App;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
-public class SelectTeamController {
+import java.io.IOException;
 
-    public Button switchToMenuButton;
+public class LeagueController {
+    @FXML
+    private Button switchToMenuButton;
 
     @FXML
     private void switchToMenu() throws IOException {
