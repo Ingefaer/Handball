@@ -9,6 +9,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -21,19 +22,16 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         //TestStoredProcedure();
+        stage.setTitle("Håndball app");
+        Image icon = new Image("/ico.png");
+        stage.getIcons().add(icon);
         scene = new Scene(loadFXML("menu"));
         stage.setScene(scene);
         stage.show();
     }
 
 
-    private static void TestStoredProcedure() {
-        DataLayer db = new DataLayer();
 
-        int n = (db.getAllCustomers()).size();
-
-    System.out.println("Antal kunder: " + n);
-    }
 
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));

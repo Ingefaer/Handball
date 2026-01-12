@@ -99,8 +99,7 @@ public class DataLayer {
             return false;
         }
     } //Testet og virker
-
-        public boolean insertMatch(Match match) {
+    public boolean insertMatch(Match match) {
             try {
                 String sql = "INSERT INTO match VALUES (?,?)";
                     /*'"
@@ -140,13 +139,13 @@ public class DataLayer {
    * Read operationer
    */
 
-    public ArrayList<Team> getTeamByWhereClause(String whereClause) {
+    private ArrayList<Team> getTeamByWhereClause(String whereClause) {
         ArrayList<Team> teams = new ArrayList<>();
         try {
             String sql = "SELECT * FROM team WHERE " + whereClause;
 
             System.out.println(sql);
-
+            //TODO: skal det være et prepared statement?
             Statement statement = connection.createStatement();
 
             ResultSet resultSet = statement.executeQuery(sql);
@@ -170,89 +169,51 @@ public class DataLayer {
         return teams;
     }
 
-    //********************************* dont need **********************************
-  public ArrayList<Customer> getAllCustomers() {
-    return getCustomersByWhereClause("0=0");
-  }
-
-  public ArrayList<Customer> getCustomersByFirstName(String firstName) {
-    return getCustomersByWhereClause("first_name='" + firstName + "'");
-  }
-
-  public ArrayList<Customer> getCustomersByLastName(String lastName) {
-    return getCustomersByWhereClause("last_name='" + lastName + "'");
-  }
-
-  public ArrayList<Customer> getCustomersByNickName(String nickName) {
-    return getCustomersByWhereClause("nickname='" + nickName + "'");
-  }
-
-  private ArrayList<Customer> getCustomersByWhereClause(String whereClause) {
-    ArrayList<Customer> customers = new ArrayList<Customer>();
-
-    try {
-      String sql = "SELECT * FROM customer WHERE " + whereClause;
-
-      System.out.println(sql);
-
-      Statement statement = connection.createStatement();
-
-      ResultSet resultSet = statement.executeQuery(sql);
-
-      // iteration starter 'before first'
-      while (resultSet.next()) {
-        // hent data fra denne række
-        int id = resultSet.getInt("id");
-        String lastName = resultSet.getString("last_name");
-        String firstName = resultSet.getString("first_name");
-        String nickName = resultSet.getString("nickname");
-
-        Customer customer = new Customer(id, lastName, firstName, nickName);
-
-        customers.add(customer);
-      }
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
+    public ArrayList<Team> getTeamByID(int teamID) {
+       return getTeamByWhereClause("id=" + teamID);
     }
 
-    return customers;
+    public ArrayList<Team> getAllTeams() {
+    return getTeamByWhereClause("0=0");
   }
 
   /*
    * Update operationer
    */
-  public void updateCustomer(Customer customer) {
-    try {
-      String sql = "UPDATE customer SET lastname='" +
-        customer.getLastName() + "', firstname='" +
-        customer.getFirstName() + "', nickname=" +
-        customer.getNickName() +
-        " WHERE id=" + customer.getId();
 
-      System.out.println(sql);
+  public boolean updateTeam(Team team) {
+      try {
+          String sql = "UPDATE team SET team = ? WHERE id = ? ";
 
-      // get statement object
-      Statement statement = connection.createStatement();
+          System.out.println(sql);
 
-      // execute sql statement
-      int affectedRows = statement.executeUpdate(sql);
+          //Get statement object
+          //Statement statement = connection.createStatement();
+          PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
-      // ToDo: check at affectedRows er 1
-    }
-    catch (SQLException e) {
-      e.printStackTrace();
-    }
+          statement.setString(1, team.getTeamName());
+          statement.setInt(2, team.getTeamID());
+
+
+          // execute sql statement
+          int affectedRows = statement.executeUpdate();
+
+          if (affectedRows != 1)
+              return false;
+
+          return true;
+      } catch (SQLException e) {
+          e.printStackTrace();
+          return false;
+      }
   }
 
     /*
      * Delete operationer
      */
-    public void deleteCustomer(Customer customer) {
+    public boolean deleteTeam(Team team) {
         try {
-            String sql = "DELETE FROM customer WHERE id=" + customer.getId();
-
-            System.out.println(sql);
+            String sql = "DELETE FROM team WHERE id=" + team.getTeamID();
 
             // get statement object
             Statement statement = connection.createStatement();
@@ -260,10 +221,14 @@ public class DataLayer {
             // execute sql statement
             int affectedRows = statement.executeUpdate(sql);
 
-            // ToDo: check at affectedRows er 1
+            if (affectedRows != 1)
+                return false;
+
+            return true;
         }
         catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

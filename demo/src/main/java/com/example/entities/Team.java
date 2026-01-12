@@ -11,10 +11,10 @@ public class Team {
         this.teamName = teamName;
         this.point = point;
     }
-
-    public Team(String teamName, int point){
-        this(0,teamName,point);
+    public Team(String teamName){
+        this(0,teamName,0);
     }
+
     //Get
     public int getTeamID() {
         return id;

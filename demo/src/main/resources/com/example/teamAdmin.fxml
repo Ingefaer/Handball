@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presentation.TeamAdminController">
     <children>
         <Button fx:id="switchToMenuButton" layoutX="31.0" layoutY="655.0" mnemonicParsing="false" onAction="#switchToMenu" text="Tilbage">
@@ -14,5 +14,41 @@
                 <Font size="18.0" />
             </font>
         </Button>
+      <ListView fx:id="teamsListView" layoutX="648.0" layoutY="47.0" prefHeight="631.0" prefWidth="541.0" style="-fx-font-size: 18;" />
+      <Label layoutX="72.0" layoutY="47.0" text="Team administration">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Button fx:id="createTeamButton" layoutX="353.0" layoutY="148.0" mnemonicParsing="false" onAction="#createTeamOnButtonPressed" text="Opret" />
+      <Button fx:id="updateTeamButton" layoutX="353.0" layoutY="258.0" mnemonicParsing="false" onAction="#updateTeamOnButtonPressed" text="Opdater" />
+      <Button fx:id="deleteTeamButton" layoutX="353.0" layoutY="409.0" mnemonicParsing="false" onAction="#deleteTeamOnButtonPressed" text="Slet team" />
+      <Label layoutX="72.0" layoutY="119.0" text="Opret hold">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="87.0" layoutY="218.0" text="Opdater hold">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="87.0" layoutY="363.0" text="Slet hold">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="87.0" layoutY="413.0" text="Vælg først hold fra listen">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="82.0" layoutY="244.0" text="Vælg først hold fra listen">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="createTeamTextField" layoutX="71.0" layoutY="148.0" />
+      <TextField fx:id="updateTeamTextField" layoutX="82.0" layoutY="271.0" />
     </children>
 </AnchorPane>
