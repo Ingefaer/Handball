@@ -3,15 +3,15 @@ package com.example.entities;
 public class Timestamp {
 
     //final fordi vi sætter timestamp en gang og aldrig ændrer den efterfølgende.
-    private final String timestamp;
+    private final int totalSeconds;
 
     //Constructor
     public Timestamp(Timer timer){
-        timestamp = (timer.toString());
+        totalSeconds = (timer.getTotalSeconds());
     }
 
     //toString
     public String toString(){
-        return timestamp;
+        return "totalsekunder i timestamp: " + totalSeconds;
     }
 }

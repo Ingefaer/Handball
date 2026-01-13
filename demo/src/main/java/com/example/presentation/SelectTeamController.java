@@ -47,15 +47,14 @@ public class SelectTeamController implements Initializable {
     @FXML
     private void switchToMatch() throws IOException {
         if (team1 != null && team2 != null && team1.getTeamID()!=team2.getTeamID()) {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("match.fxml"));
-            root = loader.load();
+
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("match.fxml"));
+            Parent root = loader.load();
+
             MatchController matchController = loader.getController();
-            matchController.setTeams(team1,team2);
-            scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
+            matchController.setTeams(team1, team2);
 
-
+            App.setRoot(root);
         } else {
             errorLabel.setText("VÆLG TO FORSKELLIGE HOLD!");
         }

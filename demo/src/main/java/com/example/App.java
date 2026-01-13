@@ -33,16 +33,21 @@ public class App extends Application {
     }
 
 
-
-
-    public static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
-
+    //sceneskift når der ikke skal information med
     private static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+    //sceneskift når der ikke skal information med
+    public static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+
+    //overloading til når der skal information med videre fra et sceneskift - bruger ikke fxml loader
+    public static void setRoot(Parent root) {
+        scene.setRoot(root);
+    }
+
 
 
     public static void main(String[] args) {

@@ -37,12 +37,12 @@
             <Font size="64.0" />
          </font>
       </Label>
-      <Button fx:id="subtractGoalButton1" layoutX="225.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="-">
+      <Button fx:id="subtractGoalButton1" layoutX="225.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractGoalButton1Pressed" prefHeight="40.0" prefWidth="40.0" text="-">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="addGoalButton1" layoutX="277.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="+">
+      <Button fx:id="addGoalButton1" layoutX="277.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#setGoalButton1Pressed" prefHeight="40.0" prefWidth="40.0" text="+">
          <font>
             <Font size="18.0" />
          </font>
@@ -112,22 +112,22 @@
             <Font size="96.0" />
          </font>
       </Label>
-      <Button fx:id="pauseMatchButton" layoutX="515.0" layoutY="365.0" mnemonicParsing="false" text="Pause">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Button>
-      <Button fx:id="endMatchButton" layoutX="561.0" layoutY="432.0" mnemonicParsing="false" text="Afslut">
+      <Button fx:id="pauseMatchButton" layoutX="546.0" layoutY="307.0" mnemonicParsing="false" onAction="#onPauseButtonPressed" text="Pause">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Button fx:id="resumeMatchButton" layoutX="648.0" layoutY="366.0" mnemonicParsing="false" text="Genoptag">
+      <Button fx:id="endMatchButton" layoutX="561.0" layoutY="432.0" mnemonicParsing="false" onAction="#onEndButtonPressed" text="Gem og afslut">
          <font>
-            <Font size="24.0" />
+            <Font size="48.0" />
          </font>
       </Button>
-      <Button fx:id="startMatchButton" layoutX="576.0" layoutY="308.0" mnemonicParsing="false" text="Start">
+      <Button fx:id="resumeMatchButton" layoutX="518.0" layoutY="307.0" mnemonicParsing="false" onAction="#onResumeButtonPressed" text="Genoptag">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Button>
+      <Button fx:id="startMatchButton" layoutX="572.0" layoutY="311.0" mnemonicParsing="false" onAction="#onStartButtonPressed" text="Start">
          <font>
             <Font size="48.0" />
          </font>

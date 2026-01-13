@@ -1,5 +1,7 @@
 package com.example.entities;
 
+import com.example.presentation.MatchController;
+
 import java.util.ArrayList;
 
 public class Match {
@@ -9,12 +11,10 @@ public class Match {
     private ArrayList<Timestamp> goalTeam2;
     private ArrayList<Timestamp> penaltyTeam1;
     private ArrayList<Timestamp> penaltyTeam2;
-    private Timer timer;
     private int matchID;
 
     //Constructor
     public Match(Team team1, Team team2) {
-        this.timer = new Timer(); //Timeren ejes af Match og er aggreret.
         this.team1 = team1;
         this.team2 = team2;
         this.goalTeam1 = new ArrayList<>();
@@ -38,32 +38,43 @@ public class Match {
         this.matchID = matchID;
     }
 
-    public void setGoal(Team team) {
-        if (team.equals(team1)) {
-            goalTeam1.add(new Timestamp(timer));
-        } else if (team.equals(team2)) {
-            goalTeam2.add(new Timestamp(timer));
+    public void setGoal(Team team, Timestamp timestamp) {
+        if (team.getTeamID() == team1.getTeamID()) {
+            goalTeam1.add(timestamp);
+        } else if (team.getTeamID() == team2.getTeamID()) {
+            goalTeam2.add(timestamp);
         } else {
             System.out.println("Error setGoal");
         }
     }
 
     public void removeGoal(Team team) {
-        if (team.equals(team1) && !goalTeam1.isEmpty()) {
+        if (team.getTeamID() == team1.getTeamID() && !goalTeam1.isEmpty()) {
             goalTeam1.remove(goalTeam1.size() - 1);
-        } else if (team.equals(team2)  && !goalTeam2.isEmpty()) {
+        } else if (team.getTeamID() == team2.getTeamID()  && !goalTeam2.isEmpty()) {
             goalTeam2.remove(goalTeam2.size() - 1);
         } else {
             System.out.println("Error removeGoal");
         }
     }
 
+    public int goalCounter(Team team) {
+        if (team.getTeamID() == team1.getTeamID()) {
+            return goalTeam1.size();
+        } else if (team.getTeamID() == team2.getTeamID()) {
+            return goalTeam2.size();
+        } else {
+            System.out.println("Error goalCounter");
+            return -1;
+        }
+    }
+
 
     public void setPenalty(Team team) {
         if (team.equals(team1)) {
-            penaltyTeam1.add(new Timestamp(timer));
+            //penaltyTeam1.add(new Timestamp(timer));
         } else if (team.equals(team2)) {
-            penaltyTeam2.add(new Timestamp(timer));
+            //penaltyTeam2.add(new Timestamp(timer));
         } else {
             System.out.println("Error setPenalty");
         }
@@ -80,9 +91,7 @@ public class Match {
     }
 
     //Todo: slet de her så vi ikke afleverer testting xD
-    public void testPrint() {
-        System.out.println(goalTeam1.get(goalTeam1.size()));
-    }
+
     public void print() {
         //Løber ArrayListen igennem, printer hver studerende, indtil listen er slut.
         for (Timestamp timestamp : goalTeam1) {
@@ -91,7 +100,5 @@ public class Match {
 
         }
     }
-
-
 }
 

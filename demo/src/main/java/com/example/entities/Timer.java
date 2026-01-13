@@ -15,6 +15,11 @@ public class Timer {
     }
 
     //Get
+    public int getTotalSeconds() {
+        return totalSeconds;
+    }
+
+    //Get
     public int getSeconds() {
         return totalSeconds % 60;
     }
@@ -22,6 +27,11 @@ public class Timer {
     //Get
     public int getMinutes() {
         return totalSeconds / 60;
+    }
+
+    //Set
+    public void setTotalSeconds(int totalSeconds) {
+        this.totalSeconds = totalSeconds;
     }
 
     //Metode
