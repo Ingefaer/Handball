@@ -1,14 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.example.presentation.MatchController"
-            prefHeight="400.0" prefWidth="600.0">
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presentation.MatchController">
+    <children>
+        <Button fx:id="switchToTeamSelectButton" layoutX="31.0" layoutY="655.0" mnemonicParsing="false" onAction="#switchToTeamSelect" text="Tilbage til holdvalg">
+            <font>
+                <Font size="18.0" />
+            </font>
+        </Button>
+      <Label fx:id="team1Label" layoutX="187.0" layoutY="103.0" text="Holdnavn 1">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="team2Label" layoutX="917.0" layoutY="112.0" text="Holdnavn 2">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="537.0" layoutY="31.0" text="Kamppanel">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Label>
+      <Label layoutX="247.0" layoutY="210.0" text="Mål">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="goalCounterLabel1" layoutX="248.0" layoutY="244.0" text="0">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Button fx:id="subtractGoalButton1" layoutX="225.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="-">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="addGoalButton1" layoutX="277.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="+">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="206.0" layoutY="426.0" text="Udvisninger">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="penaltyCounterLabel1" layoutX="248.0" layoutY="460.0" text="0">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Button fx:id="subtractPenaltyButton1" layoutX="226.0" layoutY="561.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="-">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="addPenaltyButton1" layoutX="278.0" layoutY="561.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="+">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="995.0" layoutY="214.0" text="Mål">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="goalCounterLabel2" layoutX="996.0" layoutY="248.0" text="0">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Button fx:id="subtractGoalButton2" layoutX="973.0" layoutY="342.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="-">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="addGoalButton2" layoutX="1025.0" layoutY="342.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="+">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label layoutX="954.0" layoutY="430.0" text="Udvisninger">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="penaltyCounterLabel2" layoutX="996.0" layoutY="464.0" text="0">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Button fx:id="subtractPenaltyButton2" layoutX="974.0" layoutY="565.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="-">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="addPenaltyButton2" layoutX="1026.0" layoutY="565.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="40.0" text="+">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label fx:id="timerLabel" layoutX="541.0" layoutY="193.0" text="00:00">
+         <font>
+            <Font size="96.0" />
+         </font>
+      </Label>
+      <Button fx:id="pauseMatchButton" layoutX="515.0" layoutY="365.0" mnemonicParsing="false" text="Pause">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="endMatchButton" layoutX="561.0" layoutY="432.0" mnemonicParsing="false" text="Afslut">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Button>
+      <Button fx:id="resumeMatchButton" layoutX="648.0" layoutY="366.0" mnemonicParsing="false" text="Genoptag">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="startMatchButton" layoutX="576.0" layoutY="308.0" mnemonicParsing="false" text="Start">
+         <font>
+            <Font size="48.0" />
+         </font>
+      </Button>
+    </children>
 </AnchorPane>

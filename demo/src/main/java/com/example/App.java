@@ -16,13 +16,15 @@ import javafx.stage.Stage;
  * JavaFX App
  */
 public class App extends Application {
-
+    //bruges til første metode
     private static Scene scene;
+    //bruges når vi skal have objektet med
+    private static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
         //TestStoredProcedure();
-        stage.setTitle("Håndball app");
+        stage.setTitle("Håndbold app");
         Image icon = new Image("/ico.png");
         stage.getIcons().add(icon);
         scene = new Scene(loadFXML("menu"));
@@ -41,6 +43,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+
 
     public static void main(String[] args) {
 

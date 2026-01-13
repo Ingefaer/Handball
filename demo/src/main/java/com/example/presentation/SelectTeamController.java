@@ -13,11 +13,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
+import javafx.stage.Stage;
 
 public class SelectTeamController implements Initializable {
 
@@ -30,6 +35,10 @@ public class SelectTeamController implements Initializable {
     @FXML
     public Label errorLabel;
 
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
+
     @FXML
     private void switchToMenu() throws IOException {
         App.setRoot("menu");
@@ -38,7 +47,15 @@ public class SelectTeamController implements Initializable {
     @FXML
     private void switchToMatch() throws IOException {
         if (team1 != null && team2 != null && team1.getTeamID()!=team2.getTeamID()) {
-            App.setRoot("match");
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("match.fxml"));
+            root = loader.load();
+            MatchController matchController = loader.getController();
+            matchController.setTeams(team1,team2);
+            scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+
+
         } else {
             errorLabel.setText("VÆLG TO FORSKELLIGE HOLD!");
         }
