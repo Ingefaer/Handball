@@ -1,7 +1,6 @@
 package com.example.presentation;
 
 import com.example.App;
-import com.example.data.DataLayer;
 import com.example.entities.Match;
 import com.example.entities.Team;
 import com.example.entities.Timer;
@@ -20,7 +19,6 @@ import java.io.IOException;
 public class MatchController {
     Team team1;
     Team team2;
-    int matchID;
     @FXML
     public Button switchToTeamSelectButton;
     //timerstyring
@@ -105,7 +103,7 @@ public class MatchController {
         alert.setContentText("Vær sikker på at hele kampen er spillet færdig, da den ikke kan genoptages.");
         if (alert.showAndWait().get() == ButtonType.OK) {
             timeline.stop();
-            //saveMatch();***************************************************
+            saveMatch();
             App.setRoot("menu");
         }
     }
@@ -159,15 +157,16 @@ public class MatchController {
     }
 
     private void saveMatch() {
-    DataLayer data = new DataLayer();
-    data.insertMatch(match);
-
+        match.saveMatch(match);
     }
 
     @FXML
     private void switchToTeamSelect() throws IOException {
         App.setRoot("selectTeam");
     }
+    }
 
 
-}
+
+
+

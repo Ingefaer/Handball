@@ -1,5 +1,7 @@
 package com.example.entities;
 
+import com.example.data.DataLayer;
+
 import java.util.ArrayList;
 
 public class Match {
@@ -29,6 +31,8 @@ public class Match {
     public int getTeam2ID() {
         return team2.getTeamID();
     }
+    public int getMatchID() {return matchID;}
+
 
     //Set
 
@@ -37,9 +41,9 @@ public class Match {
     }
 
     public void addGoal(Team team, Timestamp timestamp) {
-        if (team.getTeamID() == team1.getTeamID()) {
+        if (team.equals(team1)) {
             goalTeam1.add(timestamp);
-        } else if (team.getTeamID() == team2.getTeamID()) {
+        } else if (team.equals(team2)) {
             goalTeam2.add(timestamp);
         } else {
             System.out.println("Error addGoal");
@@ -47,9 +51,9 @@ public class Match {
     }
 
     public void removeGoal(Team team) {
-        if (team.getTeamID() == team1.getTeamID() && !goalTeam1.isEmpty()) {
+        if (team.equals(team1) && !goalTeam1.isEmpty()) {
             goalTeam1.remove(goalTeam1.size() - 1);
-        } else if (team.getTeamID() == team2.getTeamID()  && !goalTeam2.isEmpty()) {
+        } else if (team.equals(team2)  && !goalTeam2.isEmpty()) {
             goalTeam2.remove(goalTeam2.size() - 1);
         } else {
             System.out.println("Error removeGoal");
@@ -57,9 +61,9 @@ public class Match {
     }
 
     public int goalCounter(Team team) {
-        if (team.getTeamID() == team1.getTeamID()) {
+        if (team.equals(team1)) {
             return goalTeam1.size();
-        } else if (team.getTeamID() == team2.getTeamID()) {
+        } else if (team.equals(team2)) {
             return goalTeam2.size();
         } else {
             System.out.println("Error goalCounter");
@@ -83,31 +87,52 @@ public class Match {
         } else if (team.equals(team2) && !penaltyTeam2.isEmpty()) {
             penaltyTeam2.remove(penaltyTeam2.size() - 1);
         } else {
-            System.out.println("Error removeGoal");
+            System.out.println("Error removePenalty");
         }
     }
 
     public int penaltyCounter(Team team) {
-        if (team.getTeamID() == team1.getTeamID()) {
+        if (team.equals(team1)) {
             return penaltyTeam1.size();
-        } else if (team.getTeamID() == team2.getTeamID()) {
+        } else if (team.equals(team2)) {
             return penaltyTeam2.size();
         } else {
             System.out.println("Error penaltyCounter");
             return -1;
         }
     }
+    private void calculatePoints() {
+        if (goalTeam1.size()>goalTeam2.size()) {
+            int team1points = team1.getTeamPoint();
+            team1.setTeamPoint(team1points + 2);
 
-        //Todo: slet de her så vi ikke afleverer testting xD
-
-        public void print () {
-            //Løber ArrayListen igennem, printer hver studerende, indtil listen er slut.
-            for (Timestamp timestamp : penaltyTeam1) {
-                System.out.println(timestamp);
-
-
-            }
+        } else if (goalTeam2.size()>goalTeam1.size()) {
+            int team2points = team2.getTeamPoint();
+            team2.setTeamPoint(team2points + 2);
         }
+        else if (goalTeam1.size()==goalTeam2.size()) {
+            int team1points = team1.getTeamPoint();
+            team1.setTeamPoint(team1points + 1);
+
+            int  team2points = team2.getTeamPoint();
+            team2.setTeamPoint(team2points + 1);
+        } else {
+            System.out.println("Error setPoints");
+        }
+    }
+    public void saveMatch(Match match) {
+        DataLayer data = new DataLayer();
+        data.insertMatch(match);
+        data.insertGoalOrPenalty("goal", matchID, getTeam1ID(), goalTeam1);
+        data.insertGoalOrPenalty("goal", matchID, getTeam2ID(), goalTeam2);
+        data.insertGoalOrPenalty("penalty", matchID, getTeam1ID(), penaltyTeam1);
+        data.insertGoalOrPenalty("penalty", matchID, getTeam2ID(), penaltyTeam2);
+        calculatePoints();
+        data.updateTeam(team1);
+        data.updateTeam(team2);
+    }
+
+
     }
 
 

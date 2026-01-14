@@ -10,6 +10,10 @@ public class Timestamp {
         totalSeconds = (timer.getTotalSeconds());
     }
 
+    public int getTotalSeconds(){
+        return totalSeconds;
+    }
+
     //toString
     public String toString(){
         return "totalsekunder i timestamp: " + totalSeconds;

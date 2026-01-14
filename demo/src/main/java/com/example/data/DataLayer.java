@@ -1,6 +1,7 @@
 package com.example.data;
 
 import com.example.entities.*;
+import com.example.entities.Timestamp;
 
 
 import java.sql.*;
@@ -133,7 +134,36 @@ public class DataLayer {
                 e.printStackTrace();
                 return false;
             }
+        } //Testet og virker!
+    public boolean insertGoalOrPenalty(String goalOrPenalty, int matchID, int teamID, ArrayList<Timestamp> goalTeam) {
+        for (Timestamp timestamp : goalTeam) {
+            try {
+                String sql = "INSERT INTO " + goalOrPenalty + " VALUES (?,?,?)";
+                //teamID, timestamp, matchID
+                System.out.println(sql);
+
+                // get statement object
+                PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+
+                statement.setInt(1, teamID);
+                statement.setInt(2, timestamp.getTotalSeconds());
+                statement.setInt(3, matchID);
+
+
+                // execute sql statement
+                int affectedRows = statement.executeUpdate();
+
+                if (affectedRows != 1)
+                    return false;
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return false;
+            }
         }
+        return true;
+    }
+
 
     /*
    * Read operationer
@@ -177,13 +207,42 @@ public class DataLayer {
     return getTeamByWhereClause("0=0");
   }
 
+    public ArrayList<Team> getLeague() {
+        ArrayList<Team> teams = new ArrayList<>();
+        try {
+            String sql = "SELECT team, point FROM team ORDER BY point DESC";
+
+            System.out.println(sql);
+            //TODO: skal det være et prepared statement?
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            // iteration starter 'before first'
+            while (resultSet.next()) {
+                // hent data fra denne række
+                String teamName = resultSet.getString("team");
+                int point = resultSet.getInt("point");
+
+                Team team = new Team(teamName, point);
+                System.out.println(team);
+                teams.add(team);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return teams;
+    }
+
   /*
    * Update operationer
    */
 
   public boolean updateTeam(Team team) {
       try {
-          String sql = "UPDATE team SET team = ? WHERE id = ? ";
+          String sql = "UPDATE team SET team = ?, point = ? WHERE id = ? ";
 
           System.out.println(sql);
 
@@ -192,7 +251,8 @@ public class DataLayer {
           PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
           statement.setString(1, team.getTeamName());
-          statement.setInt(2, team.getTeamID());
+          statement.setInt(2, team.getTeamPoint());
+          statement.setInt(3, team.getTeamID());
 
 
           // execute sql statement
@@ -231,4 +291,6 @@ public class DataLayer {
             return false;
         }
     }
+
+
 }

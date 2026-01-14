@@ -11,9 +11,14 @@ public class Team {
         this.teamName = teamName;
         this.point = point;
     }
+    public Team(String teamName, int point) {
+    this(0, teamName, point);
+    }
     public Team(String teamName){
         this(0,teamName,0);
     }
+
+
 
     //Get
     public int getTeamID() {
@@ -30,7 +35,7 @@ public class Team {
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
-    public void setPoint(int point) {
+    public void setTeamPoint(int point) {
         this.point = point;
     }
 
