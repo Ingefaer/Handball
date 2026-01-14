@@ -1,6 +1,7 @@
 package com.example.presentation;
 
 import com.example.App;
+import com.example.data.DataLayer;
 import com.example.entities.Match;
 import com.example.entities.Team;
 import com.example.entities.Timer;
@@ -19,6 +20,7 @@ import java.io.IOException;
 public class MatchController {
     Team team1;
     Team team2;
+    int matchID;
     @FXML
     public Button switchToTeamSelectButton;
     //timerstyring
@@ -109,9 +111,8 @@ public class MatchController {
     }
 
     @FXML
-    public void setGoalButton1Pressed() throws IOException {
-        match.setGoal(team1, new Timestamp(timer));
-
+    public void addGoalButton1Pressed() throws IOException {
+        match.addGoal(team1, new Timestamp(timer));
         goalCounterLabel1.setText(""+match.goalCounter(team1));
     }
 
@@ -119,21 +120,47 @@ public class MatchController {
     public void subtractGoalButton1Pressed() throws IOException {
         match.removeGoal(team1);
         goalCounterLabel1.setText(""+match.goalCounter(team1));
-        match.print();
     }
 
     @FXML
     public void addGoalButton2Pressed() throws IOException {
-
+        match.addGoal(team2, new Timestamp(timer));
+        goalCounterLabel2.setText(""+match.goalCounter(team2));
     }
 
     @FXML
     public void subtractGoalButton2Pressed() throws IOException {
-
+        match.removeGoal(team2);
+        goalCounterLabel2.setText(""+match.goalCounter(team2));
     }
 
+    @FXML
+    public void addPenaltyButton1Pressed() throws IOException {
+        match.addPenalty(team1, new Timestamp(timer));
+        penaltyCounterLabel1.setText(""+match.penaltyCounter(team1));
+    }
+
+    @FXML
+    public void subtractPenaltyButton1Pressed() throws IOException {
+        match.removePenalty(team1);
+        penaltyCounterLabel1.setText(""+match.penaltyCounter(team1));
+    }
+
+    @FXML
+    public void addPenaltyButton2Pressed() throws IOException {
+        match.addPenalty(team2, new Timestamp(timer));
+        penaltyCounterLabel2.setText(""+match.penaltyCounter(team2));
+    }
+
+    @FXML
+    public void subtractPenaltyButton2Pressed() throws IOException {
+        match.removePenalty(team2);
+        penaltyCounterLabel2.setText(""+match.penaltyCounter(team2));
+    }
 
     private void saveMatch() {
+    DataLayer data = new DataLayer();
+    data.insertMatch(match);
 
     }
 

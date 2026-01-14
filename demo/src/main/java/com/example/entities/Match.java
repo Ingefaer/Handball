@@ -1,7 +1,5 @@
 package com.example.entities;
 
-import com.example.presentation.MatchController;
-
 import java.util.ArrayList;
 
 public class Match {
@@ -38,13 +36,13 @@ public class Match {
         this.matchID = matchID;
     }
 
-    public void setGoal(Team team, Timestamp timestamp) {
+    public void addGoal(Team team, Timestamp timestamp) {
         if (team.getTeamID() == team1.getTeamID()) {
             goalTeam1.add(timestamp);
         } else if (team.getTeamID() == team2.getTeamID()) {
             goalTeam2.add(timestamp);
         } else {
-            System.out.println("Error setGoal");
+            System.out.println("Error addGoal");
         }
     }
 
@@ -69,14 +67,13 @@ public class Match {
         }
     }
 
-
-    public void setPenalty(Team team) {
+    public void addPenalty(Team team, Timestamp timestamp) {
         if (team.equals(team1)) {
-            //penaltyTeam1.add(new Timestamp(timer));
+            penaltyTeam1.add(timestamp);
         } else if (team.equals(team2)) {
-            //penaltyTeam2.add(new Timestamp(timer));
+            penaltyTeam2.add(timestamp);
         } else {
-            System.out.println("Error setPenalty");
+            System.out.println("Error addPenalty");
         }
     }
 
@@ -90,15 +87,27 @@ public class Match {
         }
     }
 
-    //Todo: slet de her så vi ikke afleverer testting xD
-
-    public void print() {
-        //Løber ArrayListen igennem, printer hver studerende, indtil listen er slut.
-        for (Timestamp timestamp : goalTeam1) {
-            System.out.println(timestamp);
-
-
+    public int penaltyCounter(Team team) {
+        if (team.getTeamID() == team1.getTeamID()) {
+            return penaltyTeam1.size();
+        } else if (team.getTeamID() == team2.getTeamID()) {
+            return penaltyTeam2.size();
+        } else {
+            System.out.println("Error penaltyCounter");
+            return -1;
         }
     }
-}
+
+        //Todo: slet de her så vi ikke afleverer testting xD
+
+        public void print () {
+            //Løber ArrayListen igennem, printer hver studerende, indtil listen er slut.
+            for (Timestamp timestamp : penaltyTeam1) {
+                System.out.println(timestamp);
+
+
+            }
+        }
+    }
+
 
