@@ -12,16 +12,26 @@ public class Match {
     private ArrayList<Timestamp> penaltyTeam1;
     private ArrayList<Timestamp> penaltyTeam2;
     private int matchID;
+    DataLayer data = new DataLayer();
 
     //Constructor
-    public Match(Team team1, Team team2) {
+    public Match(int matchID, Team team1, Team team2) {
         this.team1 = team1;
         this.team2 = team2;
         this.goalTeam1 = new ArrayList<>();
         this.goalTeam2 = new ArrayList<>();
         this.penaltyTeam1 = new ArrayList<>();
         this.penaltyTeam2 = new ArrayList<>();
-        this.matchID = 0;
+        this.matchID = matchID;
+    }
+
+    public Match() {
+        this(new Team("team"), new Team("team"));
+    }
+
+    public Match(Team team1, Team team2) {
+        this(0, team1, team2);
+
     }
 
     //Get
@@ -131,8 +141,38 @@ public class Match {
         data.updateTeam(team1);
         data.updateTeam(team2);
     }
-
-
+    public ArrayList<Match> getAllMatches() {
+        return data.getAllMatches();
     }
+
+    public ArrayList<Timestamp> getGoalsByTeam(int matchID, int teamID) {
+        return data.getGoals(matchID,teamID);
+    }
+    public ArrayList<Timestamp> getPenaltiesByTeam(int matchID, int teamID) {
+        return data.getPenalties(matchID, teamID);
+    }
+
+    public String getTeamName(Team team) {
+        return team.getTeamName();
+    }
+
+    public String getTeamName(int teamNumber) {
+        if (teamNumber == 1) {
+            return team1.getTeamName();
+        } else if (teamNumber == 2) {
+            return  team2.getTeamName();
+        }
+        else {
+            return null;
+        }
+    }
+
+    public String toString(){
+        return "Match ID: " + matchID + " team1: " + team1 + " team2: " + team2;
+    }
+
+
+
+}
 
 

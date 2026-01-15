@@ -8,6 +8,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -17,14 +20,13 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class SelectReportController {
-    DataLayer data =  new DataLayer();
+public class SelectReportController implements Initializable {
     public Button switchToMenuButton;
     public Button SelectedReportButton;
     public ListView chooseMatchListView;
 
     Match match;
-    /*public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         updateListView(chooseMatchListView);
         chooseFromList(chooseMatchListView);
 
@@ -32,8 +34,9 @@ public class SelectReportController {
 
     //Metode til at opdatere listview
     private void updateListView(ListView<Match> list) {
-        ArrayList<Match> match = data.getAllMatches();
-        ObservableList<Team> oList = FXCollections.observableArrayList(match);
+        match = new Match();
+        ArrayList<Match> matches = match.getAllMatches();
+        ObservableList<Match> oList = FXCollections.observableArrayList(matches);
         list.setItems(oList);
     }
 
@@ -52,19 +55,23 @@ public class SelectReportController {
         //ListCell er et UI komponent som ListView bruger til at vise hvert komponent
         list.setCellFactory(lv -> new ListCell<Match>() {
                     @Override
-                    protected void updateItem(Team team, boolean empty) {
-                        super.updateItem(team, empty);
+                    protected void updateItem(Match match, boolean empty) {
+                        super.updateItem(match, empty);
 
-                        if (empty || team == null) {
+                        if (empty || match == null) {
                             setText(null);
                         } else {
-                            setText(team.getTeamName());
+                            setText(String.format("%-5s %-20s vs %-5s %-20s",
+                                    match.getMatchID(),
+                                    match.getTeamName(1),
+                                    "",
+                                    match.getTeamName(2)
+                            ));
                         }
                     }
                 }
         );}
 
-    **/
     @FXML
     private void switchToMenu() throws IOException {
         App.setRoot("menu");
@@ -72,6 +79,18 @@ public class SelectReportController {
 
     @FXML
     private void switchToReport() throws IOException {
-        App.setRoot("report");
+        if (match != null) {
+
+            FXMLLoader loader = new FXMLLoader(App.class.getResource("report.fxml"));
+            Parent root = loader.load();
+
+            ReportController reportController = loader.getController();
+            reportController.importSelectedMatch(match);
+
+            App.setRoot(root);
+        } else {
+            //ToDo HUSK OG FJERN DETTE
+            System.out.println("Get fucked");
+        }
     }
 }

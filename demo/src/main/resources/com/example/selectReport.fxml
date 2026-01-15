@@ -17,7 +17,7 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <ListView fx:id="chooseMatchListView" layoutX="199.0" layoutY="91.0" prefHeight="506.0" prefWidth="908.0" />
+      <ListView fx:id="chooseMatchListView" layoutX="199.0" layoutY="91.0" prefHeight="506.0" prefWidth="908.0" style="-fx-font-size: 18; -fx-font-family: Consolas;" />
       <Label layoutX="446.0" layoutY="13.0" text="Vælg kamprapport">
          <font>
             <Font size="48.0" />

@@ -10,12 +10,22 @@ public class Timestamp {
         totalSeconds = (timer.getTotalSeconds());
     }
 
+    public Timestamp(int totalSeconds){
+        this.totalSeconds = totalSeconds;
+    }
+
     public int getTotalSeconds(){
         return totalSeconds;
     }
 
+        private String normalize(int time){
+        return (time < 10 ? "0" + time: "" + time);
+    }
+
     //toString
     public String toString(){
-        return "totalsekunder i timestamp: " + totalSeconds;
+        int minutes = totalSeconds / 60;
+        int seconds = totalSeconds % 60;
+        return normalize(minutes) + ":" + normalize(seconds);
     }
 }

@@ -236,6 +236,101 @@ public class DataLayer {
         return teams;
     }
 
+    private ArrayList<Match> getMatchByWhereClause(String whereClause) {
+        ArrayList<Match> matches = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM match WHERE " + whereClause + "ORDER BY id DESC";
+
+            System.out.println(sql);
+            //TODO: skal det være et prepared statement?
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            // iteration starter 'before first'
+            while (resultSet.next()) {
+                // hent data fra denne række
+                int matchID = resultSet.getInt("id");
+                int team1ID = resultSet.getInt("teamID1");
+                int team2ID = resultSet.getInt("teamID2");
+
+                Team team1 = getTeamByID(team1ID).get(0);
+                Team team2 = getTeamByID(team2ID).get(0);
+                Match match = new Match(matchID, team1, team2);
+                System.out.println(match);
+                matches.add(match);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return matches;
+    }
+
+    public ArrayList<Match> getAllMatches() {
+        return getMatchByWhereClause("0=0");
+    }
+
+    public ArrayList<Timestamp> getGoals(int matchID, int teamID) {
+        ArrayList<Timestamp> goals = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM goal WHERE teamID = " + teamID + " AND matchID = " + matchID + " ORDER BY id ASC";
+
+            System.out.println(sql);
+            //TODO: skal det være et prepared statement?
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            // iteration starter 'before first'
+            while (resultSet.next()) {
+                // hent data fra denne række
+                //int matchID = resultSet.getInt("id");
+                //int team1ID = resultSet.getInt("teamID1");
+                //int team2ID = resultSet.getInt("teamID2");
+                int timestamp = resultSet.getInt("timestamp");
+                Timestamp goal = new Timestamp(timestamp);
+                goals.add(goal);
+                System.out.println(goal);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return goals;
+    }
+
+    public ArrayList<Timestamp> getPenalties(int matchID, int teamID) {
+        ArrayList<Timestamp> penalties = new ArrayList<>();
+        try {
+            String sql = "SELECT * FROM penalty WHERE teamID = " + teamID + " AND matchID = " + matchID + " ORDER BY id ASC";
+
+            System.out.println(sql);
+            //TODO: skal det være et prepared statement?
+            Statement statement = connection.createStatement();
+
+            ResultSet resultSet = statement.executeQuery(sql);
+
+            // iteration starter 'before first'
+            while (resultSet.next()) {
+                // hent data fra denne række
+                //int matchID = resultSet.getInt("id");
+                //int team1ID = resultSet.getInt("teamID1");
+                //int team2ID = resultSet.getInt("teamID2");
+                int timestamp = resultSet.getInt("timestamp");
+                Timestamp penalty = new Timestamp(timestamp);
+                penalties.add(penalty);
+                System.out.println(penalty);
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return penalties;
+    }
   /*
    * Update operationer
    */

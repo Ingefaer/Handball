@@ -14,6 +14,9 @@ public class TestClass {
         //System.out.println(timer);
         //System.out.println(timestamp1);
 
-        dataLayer.getLeague();
+        //dataLayer.getLeague();
+
+        //dataLayer.getAllMatches();
+        //dataLayer.getGoals(2,5);
     }
 }
