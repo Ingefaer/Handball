@@ -100,7 +100,7 @@ public class MatchController {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Vil du afslutte kampen?");
-        alert.setContentText("Vær sikker på at hele kampen er spillet færdig, da den ikke kan genoptages.");
+        alert.setContentText("Vær sikker på at hele kampen er spillet færdig, da den ikke kan genoptages. Du vil blive returneret til menuen, og kan genfinde rapporten under kamprapporter.");
         if (alert.showAndWait().get() == ButtonType.OK) {
             timeline.stop();
             saveMatch();
