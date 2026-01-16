@@ -29,6 +29,7 @@ public class App extends Application {
         stage.getIcons().add(icon);
         scene = new Scene(loadFXML("menu"));
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
     }
 
