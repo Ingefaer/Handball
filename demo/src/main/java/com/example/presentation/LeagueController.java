@@ -22,21 +22,14 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class LeagueController implements Initializable {
+    DataLayer data = new DataLayer();
     @FXML
-    public TableView<Team> leagueTableView;
-
+    private TableView<Team> leagueTableView;
     @FXML
     private TableColumn<Team, String> teamName;
-
     @FXML
-    private TableColumn<Team, Integer> points;
+    private TableColumn<Team, Integer> points, rank;
 
-    @FXML
-    private TableColumn<Team, Integer> rank;
-
-    @FXML
-    private Button switchToMenuButton;
-    DataLayer data = new DataLayer();
 
     @FXML
     private void switchToMenu() throws IOException {
@@ -57,8 +50,6 @@ public class LeagueController implements Initializable {
                     cell ->
                             new SimpleIntegerProperty(cell.getValue().getTeamPoint()).asObject()
             );
-
-
 
             rank.setCellValueFactory(cellData ->
                     new ReadOnlyObjectWrapper<>(

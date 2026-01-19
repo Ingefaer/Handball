@@ -3,35 +3,20 @@ package com.example.entities;
 public class Timer {
     private int totalSeconds;
 
-
     //Default Constructor
     public Timer(){
         this.totalSeconds = 0;
-    }
-
-    //Constructor
-    public Timer(int totalSeconds) {
-        this.totalSeconds = totalSeconds;
     }
 
     //Get
     public int getTotalSeconds() {
         return totalSeconds;
     }
-
-    //Get
-    public int getSeconds() {
+    private int getSeconds() {
         return totalSeconds % 60;
     }
-
-    //Get
-    public int getMinutes() {
+    private int getMinutes() {
         return totalSeconds / 60;
-    }
-
-    //Set
-    public void setTotalSeconds(int totalSeconds) {
-        this.totalSeconds = totalSeconds;
     }
 
     //Metode
@@ -40,7 +25,7 @@ public class Timer {
     }
 
     private String normalize(int time){
-        return (time < 10 ? "0" + time: "" + time);
+        return (time < 10 ? "0" + time : "" + time);
     }
 
     @Override

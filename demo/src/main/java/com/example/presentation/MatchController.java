@@ -1,6 +1,7 @@
 package com.example.presentation;
 
 import com.example.App;
+import com.example.data.DataLayer;
 import com.example.entities.Match;
 import com.example.entities.Team;
 import com.example.entities.Timer;
@@ -44,8 +45,6 @@ public class MatchController {
     private Timeline timeline;
     //Timeline er en JavaFX-klasse, der bruges til tidsstyrede handlinger(animationer, opdateringer, spil-loops osv.).
 
-
-
     public void setTeams(Team team1, Team team2) throws IOException {
         this.team1 = team1;
         this.team2 = team2;
@@ -53,14 +52,13 @@ public class MatchController {
         team2Label.setText(team2.getTeamName());
 
         this.match = new Match(team1,team2);
-
     }
-
 
     @FXML
     public void initialize() {
         pauseMatchButton.setVisible(false);
         resumeMatchButton.setVisible(false);
+        endMatchButton.setVisible(false);
         //Initialize metoden køres automatisk, når FXML-filen er indlæst. den bruges til opsætning
         timerLabel.setText(timer.toString());
         // sætter label til at vise starttiden 00:00 mm:ss
@@ -70,6 +68,12 @@ public class MatchController {
                     //keyframe siger: efter denne tid gør noget. duration angiver tiden for hver gentagelse
                     timer.count();
                     timerLabel.setText(timer.toString());
+                    if (timer.getTotalSeconds() == 60) {
+                        timeline.pause(); // Stop midlertidigt
+                        pauseMatchButton.setVisible(false);
+                        resumeMatchButton.setVisible(true);
+                    }
+
                     }
                 )
         );
@@ -81,6 +85,7 @@ public class MatchController {
         timeline.play();
         startMatchButton.setVisible(false);
         pauseMatchButton.setVisible(true);
+        endMatchButton.setVisible(true);
     }
     @FXML
     public void onPauseButtonPressed() {
@@ -103,6 +108,8 @@ public class MatchController {
         alert.setTitle("Confirmation");
         alert.setHeaderText("Vil du afslutte kampen?");
         alert.setContentText("Vær sikker på at hele kampen er spillet færdig, da den ikke kan genoptages. Du vil blive returneret til menuen, og kan genfinde rapporten under kamprapporter.");
+        alert.setResizable(true);
+        alert.getDialogPane().setPrefHeight(200);
         if (alert.showAndWait().get() == ButtonType.OK) {
             timeline.stop();
             saveMatch();
@@ -159,12 +166,33 @@ public class MatchController {
     }
 
     private void saveMatch() {
-        match.saveMatch(match);
+        DataLayer data = new DataLayer();
+        data.insertMatch(match);
+        data.insertGoalOrPenalty("goal", match.getMatchID(), match.getTeam1ID(), match.getGoalsByTeam(team1));
+        data.insertGoalOrPenalty("goal", match.getMatchID(), match.getTeam2ID(), match.getGoalsByTeam(team2));
+        data.insertGoalOrPenalty("penalty", match.getMatchID(), match.getTeam1ID(), match.getPenaltiesByTeam(team1));
+        data.insertGoalOrPenalty("penalty", match.getMatchID(), match.getTeam2ID(), match.getPenaltiesByTeam(team2));
+        match.calculatePoints();
+        data.updateTeam(team1);
+        data.updateTeam(team2);
     }
+
 
     @FXML
     private void switchToTeamSelect() throws IOException {
-        App.setRoot("selectTeam");
+        timeline.pause();
+        pauseMatchButton.setVisible(false);
+        resumeMatchButton.setVisible(true);
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation");
+        alert.setHeaderText("Vil du returnere til holdvalg?");
+        alert.setContentText("Kampen gemmes ikke!");
+        alert.setResizable(true);
+        alert.getDialogPane().setPrefHeight(140);
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            timeline.stop();
+            App.setRoot("selectTeam");
+        }
     }
     }
 

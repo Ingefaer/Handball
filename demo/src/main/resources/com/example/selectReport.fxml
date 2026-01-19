@@ -17,11 +17,17 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <ListView fx:id="chooseMatchListView" layoutX="186.0" layoutY="150.0" prefHeight="506.0" prefWidth="908.0" style="-fx-font-size: 18; -fx-font-family: Consolas;" />
+      <ListView fx:id="chooseMatchListView" layoutX="286.0" layoutY="150.0" prefHeight="459.0" prefWidth="708.0" style="-fx-font-size: 18; -fx-font-family: Consolas;" />
       <Label layoutX="440.0" layoutY="50.0" text="Vælg kamprapport">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
+    <Label fx:id="errorLabel" layoutX="434.0" layoutY="646.0" text="" textFill="RED">
+        <font>
+            <Font size="36.0" />
+        </font>
+    </Label>
+
     </children>
 </AnchorPane>

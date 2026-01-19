@@ -57,6 +57,7 @@
       <ListView fx:id="penaltyTeam1ListView" layoutX="360.0" layoutY="310.0" prefHeight="255.0" prefWidth="200.0" />
       <ListView fx:id="goalTeam2ListView" layoutX="720.0" layoutY="310.0" prefHeight="255.0" prefWidth="200.0" />
       <ListView fx:id="penaltyTeam2ListView" layoutX="1000.0" layoutY="310.0" prefHeight="255.0" prefWidth="200.0" />
+      <Button fx:id="ExportButton" layoutX="1182.0" layoutY="663.0" mnemonicParsing="false" onAction="#onExportCSV" text="Export" />
 
     </children>
 </AnchorPane>

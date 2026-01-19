@@ -12,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
@@ -21,20 +22,24 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class SelectReportController implements Initializable {
+    DataLayer data = new DataLayer();
     public Button switchToMenuButton;
     public Button SelectedReportButton;
+    public Label errorLabel;
     public ListView chooseMatchListView;
+
 
     Match match;
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateListView(chooseMatchListView);
         chooseFromList(chooseMatchListView);
+        errorLabel.setVisible(false);
     }
 
     //Metode til at opdatere listview
     private void updateListView(ListView<Match> list) {
         match = new Match();
-        ArrayList<Match> matches = match.getAllMatches();
+        ArrayList<Match> matches = data.getAllMatches();
         ObservableList<Match> oList = FXCollections.observableArrayList(matches);
         list.setItems(oList);
     }
@@ -88,8 +93,9 @@ public class SelectReportController implements Initializable {
 
             App.setRoot(root);
         } else {
-            //ToDo HUSK OG FJERN DETTE
-            System.out.println("Vælg en match");
+            errorLabel.setText("Vælg venligst en kamp!");
+            errorLabel.setVisible(true);
+
         }
     }
 }

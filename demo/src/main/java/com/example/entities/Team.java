@@ -1,9 +1,8 @@
 package com.example.entities;
 
 public class Team {
-    private int id;
+    private int id, point;
     private String teamName;
-    private int point;
 
     //Constructor
     public Team(int id, String teamName, int point){
@@ -11,14 +10,14 @@ public class Team {
         this.teamName = teamName;
         this.point = point;
     }
+    //Bruges til at hente teams uden ID til liga
     public Team(String teamName, int point) {
-    this(0, teamName, point);
+        this(0, teamName, point);
     }
+    //Bruges til oprettelse af nyt team
     public Team(String teamName){
         this(0,teamName,0);
     }
-
-
 
     //Get
     public int getTeamID() {
@@ -38,14 +37,12 @@ public class Team {
     public void setTeamPoint(int point) {
         this.point = point;
     }
-
     public void setTeamID(int id) {
         this.id = id;
     }
 
     //toString
     public String toString(){
-        //todo Opdater string hvis den bruges i UI
         return "TeamName: " + teamName + ", id: " + id + ", point: " + point;
     }
 }

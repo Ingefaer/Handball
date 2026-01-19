@@ -1,8 +1,7 @@
 package com.example.entities;
 
-import com.example.data.DataLayer;
-
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 public class Match {
     private Team team1;
@@ -12,7 +11,6 @@ public class Match {
     private ArrayList<Timestamp> penaltyTeam1;
     private ArrayList<Timestamp> penaltyTeam2;
     private int matchID;
-    DataLayer data = new DataLayer();
 
     //Constructor
     public Match(int matchID, Team team1, Team team2) {
@@ -24,14 +22,13 @@ public class Match {
         this.penaltyTeam2 = new ArrayList<>();
         this.matchID = matchID;
     }
-
+    //ToDo Skal måske slettes
     public Match() {
         this(new Team("team"), new Team("team"));
     }
-
+    //Overloader constructor for og en ny match oprettes, uden ID som senere skal gemmes til DB.
     public Match(Team team1, Team team2) {
         this(0, team1, team2);
-
     }
 
     //Get
@@ -45,7 +42,7 @@ public class Match {
 
 
     //Set
-
+    //Når vi gemmer en match til databasen, returnere den det nye ID og sætter det på den match vi har fat i.
     public void setMatchID(int matchID) {
         this.matchID = matchID;
     }
@@ -111,7 +108,7 @@ public class Match {
             return -1;
         }
     }
-    private void calculatePoints() {
+    public void calculatePoints() {
         if (goalTeam1.size()>goalTeam2.size()) {
             int team1points = team1.getTeamPoint();
             team1.setTeamPoint(team1points + 2);
@@ -130,30 +127,26 @@ public class Match {
             System.out.println("Error setPoints");
         }
     }
-    public void saveMatch(Match match) {
-        DataLayer data = new DataLayer();
-        data.insertMatch(match);
-        data.insertGoalOrPenalty("goal", matchID, getTeam1ID(), goalTeam1);
-        data.insertGoalOrPenalty("goal", matchID, getTeam2ID(), goalTeam2);
-        data.insertGoalOrPenalty("penalty", matchID, getTeam1ID(), penaltyTeam1);
-        data.insertGoalOrPenalty("penalty", matchID, getTeam2ID(), penaltyTeam2);
-        calculatePoints();
-        data.updateTeam(team1);
-        data.updateTeam(team2);
-    }
-    public ArrayList<Match> getAllMatches() {
-        return data.getAllMatches();
-    }
 
-    public ArrayList<Timestamp> getGoalsByTeam(int matchID, int teamID) {
-        return data.getGoals(matchID,teamID);
+    public ArrayList<Timestamp> getGoalsByTeam(Team team){
+        if (team.equals(team1)) {
+            return goalTeam1;
+        } else if (team.equals(team2)) {
+            return goalTeam2;
+        } else {
+            System.out.println("Error getGoalsByTeam");
+            return null;
+        }
     }
-    public ArrayList<Timestamp> getPenaltiesByTeam(int matchID, int teamID) {
-        return data.getPenalties(matchID, teamID);
-    }
-
-    public String getTeamName(Team team) {
-        return team.getTeamName();
+    public ArrayList<Timestamp> getPenaltiesByTeam(Team team) {
+        if (team.equals(team1)) {
+            return penaltyTeam1;
+        } else if (team.equals(team2)) {
+            return penaltyTeam2;
+        } else {
+            System.out.println("Error getPenaltiesByTeam");
+            return null;
+        }
     }
 
     public String getTeamName(int teamNumber) {
@@ -171,7 +164,26 @@ public class Match {
         return "Match ID: " + matchID + " team1: " + team1 + " team2: " + team2;
     }
 
+    public String toCSV() {
+        //TODO: Finde ud af hvordan vi trækker arraylistsne
+        ArrayList<Timestamp> goals1 = goalTeam1;
+        ArrayList<Timestamp> goals2 = goalTeam2;
+        ArrayList<Timestamp> penalty1 = penaltyTeam1;
+        ArrayList<Timestamp> penalty2 = penaltyTeam2;
 
+        String g1 = goals1.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
+        String g2 = goals2.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
+        String p1 = penalty1.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
+        String p2 = penalty2.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
+
+        return matchID + ";" +
+                "\"" + team1.getTeamName() + "\"," +
+                "\"" + g1 + "\"," +
+                "\"" + p1 + "\"," +
+                "\"" + team2.getTeamName() + "\"," +
+                "\"" + g2 + "\"," +
+                "\"" + p2 + "\",";
+    }
 
 }
 

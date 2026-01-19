@@ -69,6 +69,12 @@ public class TeamAdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateListView();
+        // ENTER til opret
+        createTeamTextField.setOnAction(e -> createTeamOnButtonPressed(null));
+
+        // ENTER til opdater
+        updateTeamTextField.setOnAction(e -> updateTeamOnButtonPressed(null));
+
 
         //Udtrækker data fra det valgte element fra list
         teamsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
