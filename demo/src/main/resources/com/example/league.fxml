@@ -14,14 +14,14 @@
             <Font size="18.0" />
          </font>
       </Button>
-      <TableView fx:id="leagueTableView" layoutX="223.0" layoutY="122.0" prefHeight="463.0" prefWidth="502.0">
+      <TableView fx:id="leagueTableView" layoutX="390.0" layoutY="122.0" prefHeight="463.0" prefWidth="500.0">
         <columns>
           <TableColumn fx:id="rank" prefWidth="75.0" text="Position" />
           <TableColumn fx:id="teamName" prefWidth="333.5999755859375" text="Holdnavn" />
             <TableColumn fx:id="points" minWidth="0.0" prefWidth="92.79998779296875" text="Points" />
         </columns>
       </TableView>
-      <Label layoutX="352.0" layoutY="40.0" text="Liga stilling">
+      <Label layoutX="520.0" layoutY="40.0" prefWidth="240.0" text="Liga stilling">
          <font>
             <Font size="48.0" />
          </font>

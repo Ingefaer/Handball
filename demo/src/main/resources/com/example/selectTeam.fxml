@@ -13,19 +13,19 @@
                 <Font size="18.0" />
             </font>
         </Button>
-      <Label layoutX="550.0" layoutY="53.0" text="Holdvælger">
+      <Label layoutX="515.0" layoutY="53.0" prefWidth="250.0" text="Holdvælger">
          <font>
-            <Font size="36.0" />
+            <Font size="48.0" />
          </font>
       </Label>
-      <ListView fx:id="team1ListView" layoutX="177.0" layoutY="134.0" prefHeight="504.0" prefWidth="349.0" />
-      <ListView fx:id="team2ListView" layoutX="788.0" layoutY="135.0" prefHeight="504.0" prefWidth="349.0" />
-      <Button fx:id="switchToMatchButton" layoutX="1093.0" layoutY="655.0" mnemonicParsing="false" onAction="#switchToMatch" text="Fortsæt til kamp">
+      <ListView fx:id="team1ListView" layoutX="180.0" layoutY="135.0" prefHeight="504.0" prefWidth="350.0" />
+      <ListView fx:id="team2ListView" layoutX="750.0" layoutY="135.0" prefHeight="504.0" prefWidth="350.0" />
+      <Button fx:id="switchToMatchButton" layoutX="1095.0" layoutY="655.0" mnemonicParsing="false" onAction="#switchToMatch" prefWidth="154.0" text="Fortsæt til kamp">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="608.0" layoutY="320.0" text="VS">
+      <Label layoutX="605.0" layoutY="320.0" prefWidth="70.0" text="VS">
          <font>
             <Font size="57.0" />
          </font>

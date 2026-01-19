@@ -29,7 +29,6 @@ public class SelectReportController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateListView(chooseMatchListView);
         chooseFromList(chooseMatchListView);
-
     }
 
     //Metode til at opdatere listview
@@ -79,7 +78,7 @@ public class SelectReportController implements Initializable {
 
     @FXML
     private void switchToReport() throws IOException {
-        if (match != null) {
+        if (match.getMatchID() != 0) {
 
             FXMLLoader loader = new FXMLLoader(App.class.getResource("report.fxml"));
             Parent root = loader.load();
@@ -90,7 +89,7 @@ public class SelectReportController implements Initializable {
             App.setRoot(root);
         } else {
             //ToDo HUSK OG FJERN DETTE
-            System.out.println("Get fucked");
+            System.out.println("Vælg en match");
         }
     }
 }

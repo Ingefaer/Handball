@@ -14,41 +14,41 @@
                 <Font size="18.0" />
             </font>
         </Button>
-      <ListView fx:id="teamsListView" layoutX="648.0" layoutY="47.0" prefHeight="631.0" prefWidth="541.0" style="-fx-font-size: 18;" />
-      <Label layoutX="72.0" layoutY="47.0" text="Team administration">
+      <ListView fx:id="teamsListView" layoutX="648.0" layoutY="50.0" prefHeight="631.0" prefWidth="541.0" style="-fx-font-size: 18;" />
+      <Label layoutX="75.0" layoutY="50.0" text="Team administration">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Button fx:id="createTeamButton" layoutX="353.0" layoutY="148.0" mnemonicParsing="false" onAction="#createTeamOnButtonPressed" text="Opret" />
-      <Button fx:id="updateTeamButton" layoutX="353.0" layoutY="258.0" mnemonicParsing="false" onAction="#updateTeamOnButtonPressed" text="Opdater" />
-      <Button fx:id="deleteTeamButton" layoutX="353.0" layoutY="409.0" mnemonicParsing="false" onAction="#deleteTeamOnButtonPressed" text="Slet team" />
-      <Label layoutX="72.0" layoutY="119.0" text="Opret hold">
+      <Button fx:id="createTeamButton" layoutX="350.0" layoutY="150.0" mnemonicParsing="false" onAction="#createTeamOnButtonPressed" prefWidth="68.0" text="Opret" />
+      <Button fx:id="updateTeamButton" layoutX="350.0" layoutY="270.0" mnemonicParsing="false" onAction="#updateTeamOnButtonPressed" prefWidth="68.0" text="Opdater" />
+      <Button fx:id="deleteTeamButton" layoutX="350.0" layoutY="390.0" mnemonicParsing="false" onAction="#deleteTeamOnButtonPressed" prefWidth="68.0" text="Slet team" />
+      <Label layoutX="75.0" layoutY="120.0" text="Opret hold">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="87.0" layoutY="218.0" text="Opdater hold">
+      <Label layoutX="75.0" layoutY="220.0" text="Opdater hold">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="87.0" layoutY="363.0" text="Slet hold">
+      <Label layoutX="75.0" layoutY="360.0" text="Slet hold">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="87.0" layoutY="413.0" text="Vælg først hold fra listen">
+      <Label layoutX="75.0" layoutY="390.0" text="Vælg først hold fra listen">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Label layoutX="82.0" layoutY="244.0" text="Vælg først hold fra listen">
+      <Label layoutX="75.0" layoutY="250.0" text="Vælg først hold fra listen">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextField fx:id="createTeamTextField" layoutX="71.0" layoutY="148.0" />
-      <TextField fx:id="updateTeamTextField" layoutX="82.0" layoutY="271.0" />
+      <TextField fx:id="createTeamTextField" layoutX="75.0" layoutY="150.0" prefWidth="200.0" />
+      <TextField fx:id="updateTeamTextField" layoutX="75.0" layoutY="280.0" prefWidth="200.0" />
     </children>
 </AnchorPane>

@@ -12,77 +12,77 @@
                 <Font size="18.0" />
             </font>
         </Button>
-      <Label fx:id="team1Label" layoutX="187.0" layoutY="103.0" text="Holdnavn 1">
+      <Label fx:id="team1Label" alignment="CENTER" layoutX="65.0" layoutY="110.0" prefWidth="400.0" text="Holdnavn 1">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label fx:id="team2Label" layoutX="917.0" layoutY="112.0" text="Holdnavn 2">
+      <Label fx:id="team2Label" alignment="CENTER" layoutX="815.0" layoutY="110.0" prefWidth="400.0" text="Holdnavn 2">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="537.0" layoutY="31.0" text="Kamppanel">
+      <Label layoutX="520.0" layoutY="50.0" prefWidth="240.0" text="Kamppanel">
          <font>
             <Font size="48.0" />
          </font>
       </Label>
-      <Label layoutX="247.0" layoutY="210.0" text="Mål">
+      <Label layoutX="217.0" layoutY="210.0" text="Mål">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="goalCounterLabel1" layoutX="248.0" layoutY="244.0" text="0">
+      <Label fx:id="goalCounterLabel1" alignment="CENTER" layoutX="158.0" layoutY="244.0" prefWidth="150.0" text="0">
          <font>
             <Font size="64.0" />
          </font>
       </Label>
-      <Button fx:id="subtractGoalButton1" layoutX="225.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractGoalButton1Pressed" prefHeight="40.0" prefWidth="40.0" text="-">
+      <Button fx:id="subtractGoalButton1" layoutX="187.0" layoutY="338.0" maxHeight="43.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractGoalButton1Pressed" prefHeight="43.0" prefWidth="40.0" text="-">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="addGoalButton1" layoutX="277.0" layoutY="338.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addGoalButton1Pressed" prefHeight="40.0" prefWidth="40.0" text="+">
+      <Button fx:id="addGoalButton1" layoutX="239.0" layoutY="338.0" maxHeight="43.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addGoalButton1Pressed" prefHeight="43.0" prefWidth="40.0" text="+">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="206.0" layoutY="426.0" text="Udvisninger">
+      <Label layoutX="170.0" layoutY="426.0" prefWidth="128.0" text="Udvisninger">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="penaltyCounterLabel1" layoutX="248.0" layoutY="460.0" text="0">
+      <Label fx:id="penaltyCounterLabel1" alignment="CENTER" layoutX="158.0" layoutY="460.0" prefWidth="150.0" text="0">
          <font>
             <Font size="64.0" />
          </font>
       </Label>
-      <Button fx:id="subtractPenaltyButton1" layoutX="226.0" layoutY="561.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractPenaltyButton1Pressed" prefHeight="40.0" prefWidth="40.0" text="-">
+      <Button fx:id="subtractPenaltyButton1" layoutX="187.0" layoutY="561.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractPenaltyButton1Pressed" prefHeight="43.0" prefWidth="40.0" text="-">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="addPenaltyButton1" layoutX="278.0" layoutY="561.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addPenaltyButton1Pressed" prefHeight="40.0" prefWidth="40.0" text="+">
+      <Button fx:id="addPenaltyButton1" layoutX="239.0" layoutY="561.0" maxHeight="43.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addPenaltyButton1Pressed" prefHeight="43.0" prefWidth="40.0" text="+">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label layoutX="995.0" layoutY="214.0" text="Mål">
+      <Label layoutX="995.0" layoutY="210.0" text="Mål">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="goalCounterLabel2" layoutX="996.0" layoutY="248.0" text="0">
+      <Label fx:id="goalCounterLabel2" alignment="CENTER" layoutX="944.0" layoutY="244.0" prefWidth="150.0" text="0">
          <font>
             <Font size="64.0" />
          </font>
       </Label>
-      <Button fx:id="subtractGoalButton2" layoutX="973.0" layoutY="342.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractGoalButton2Pressed" prefHeight="40.0" prefWidth="40.0" text="-">
+      <Button fx:id="subtractGoalButton2" layoutX="973.0" layoutY="342.0" maxHeight="43.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractGoalButton2Pressed" prefHeight="43.0" prefWidth="40.0" text="-">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="addGoalButton2" layoutX="1025.0" layoutY="342.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addGoalButton2Pressed" prefHeight="40.0" prefWidth="40.0" text="+">
+      <Button fx:id="addGoalButton2" layoutX="1025.0" layoutY="342.0" maxHeight="43.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addGoalButton2Pressed" prefHeight="43.0" prefWidth="40.0" text="+">
          <font>
             <Font size="18.0" />
          </font>
@@ -92,22 +92,22 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Label fx:id="penaltyCounterLabel2" layoutX="996.0" layoutY="464.0" text="0">
+      <Label fx:id="penaltyCounterLabel2" alignment="CENTER" layoutX="947.0" layoutY="463.0" prefWidth="150.0" text="0">
          <font>
             <Font size="64.0" />
          </font>
       </Label>
-      <Button fx:id="subtractPenaltyButton2" layoutX="974.0" layoutY="565.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractPenaltyButton2Pressed" prefHeight="40.0" prefWidth="40.0" text="-">
+      <Button fx:id="subtractPenaltyButton2" layoutX="974.0" layoutY="565.0" maxHeight="43.0" maxWidth="40.0" mnemonicParsing="false" onAction="#subtractPenaltyButton2Pressed" prefHeight="43.0" prefWidth="40.0" text="-">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="addPenaltyButton2" layoutX="1026.0" layoutY="565.0" maxHeight="40.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addPenaltyButton2Pressed" prefHeight="40.0" prefWidth="40.0" text="+">
+      <Button fx:id="addPenaltyButton2" layoutX="1026.0" layoutY="565.0" maxHeight="43.0" maxWidth="40.0" mnemonicParsing="false" onAction="#addPenaltyButton2Pressed" prefHeight="43.0" prefWidth="40.0" text="+">
          <font>
             <Font size="18.0" />
          </font>
       </Button>
-      <Label fx:id="timerLabel" layoutX="541.0" layoutY="193.0" text="00:00">
+      <Label fx:id="timerLabel" layoutX="526.0" layoutY="150.0" text="00:00">
          <font>
             <Font size="96.0" />
          </font>
@@ -117,17 +117,17 @@
             <Font size="48.0" />
          </font>
       </Button>
-      <Button fx:id="endMatchButton" layoutX="561.0" layoutY="432.0" mnemonicParsing="false" onAction="#onEndButtonPressed" text="Gem og afslut">
+      <Button fx:id="endMatchButton" layoutX="459.0" layoutY="420.0" mnemonicParsing="false" onAction="#onEndButtonPressed" prefWidth="362.0" text="Gem og afslut">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Button fx:id="resumeMatchButton" layoutX="518.0" layoutY="307.0" mnemonicParsing="false" onAction="#onResumeButtonPressed" text="Genoptag">
+      <Button fx:id="resumeMatchButton" layoutX="502.0" layoutY="307.0" mnemonicParsing="false" onAction="#onResumeButtonPressed" prefWidth="276.0" text="Genoptag">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Button fx:id="startMatchButton" layoutX="572.0" layoutY="311.0" mnemonicParsing="false" onAction="#onStartButtonPressed" text="Start">
+      <Button fx:id="startMatchButton" layoutX="558.0" layoutY="307.0" mnemonicParsing="false" onAction="#onStartButtonPressed" prefWidth="164.0" text="Start">
          <font>
             <Font size="48.0" />
          </font>

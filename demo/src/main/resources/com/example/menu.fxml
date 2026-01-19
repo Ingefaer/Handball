@@ -9,27 +9,27 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.presentation.MenuController">
    <children>
-      <Label layoutX="535.0" layoutY="75.0" prefHeight="99.0" prefWidth="226.0" text="Menu">
+      <Label layoutX="527.0" layoutY="70.0" prefHeight="99.0" prefWidth="226.0" text="Menu" AnchorPane.topAnchor="70.0">
          <font>
             <Font size="83.0" />
          </font>
       </Label>
-      <Button fx:id="switchToAttendanceButton" layoutX="560.0" layoutY="203.0" mnemonicParsing="false" onAction="#switchToSelectTeam" prefHeight="54.0" prefWidth="160.0" text="Match">
+      <Button fx:id="switchToAttendanceButton" layoutX="540.0" layoutY="200.0" mnemonicParsing="false" onAction="#switchToSelectTeam" prefHeight="55.0" prefWidth="200.0" text="Match" AnchorPane.topAnchor="200.0">
          <font>
             <Font size="38.0" />
          </font>
       </Button>
-      <Button fx:id="switchToAttendanceButton1" layoutX="560.0" layoutY="307.0" mnemonicParsing="false" onAction="#switchToTeamAdmin" prefHeight="54.0" prefWidth="160.0" text="Hold">
+      <Button fx:id="switchToAttendanceButton1" layoutX="540.0" layoutY="300.0" maxHeight="55.0" mnemonicParsing="false" onAction="#switchToTeamAdmin" prefHeight="55.0" prefWidth="200.0" text="Hold" AnchorPane.topAnchor="300.0">
          <font>
             <Font size="38.0" />
          </font>
       </Button>
-      <Button fx:id="switchToAttendanceButton11" layoutX="558.0" layoutY="412.0" mnemonicParsing="false" onAction="#switchToSelectReport" prefHeight="70.0" prefWidth="200.0" text="Rapport">
+      <Button fx:id="switchToAttendanceButton11" layoutX="540.0" layoutY="400.0" mnemonicParsing="false" onAction="#switchToSelectReport" prefHeight="55.0" prefWidth="200.0" text="Rapport" AnchorPane.topAnchor="400.0">
          <font>
             <Font size="38.0" />
          </font>
       </Button>
-      <Button fx:id="switchToAttendanceButton111" layoutX="557.0" layoutY="533.0" mnemonicParsing="false" onAction="#switchToLeague" prefHeight="54.0" prefWidth="160.0" text="Liga">
+      <Button fx:id="switchToAttendanceButton111" layoutX="540.0" layoutY="500.0" mnemonicParsing="false" onAction="#switchToLeague" prefHeight="55.0" prefWidth="200.0" text="Liga" AnchorPane.topAnchor="500.0">
          <font>
             <Font size="38.0" />
          </font>

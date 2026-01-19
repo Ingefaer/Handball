@@ -19,6 +19,9 @@ import java.io.IOException;
 public class MatchController {
     Team team1;
     Team team2;
+    private Timer timer = new Timer(); //opretter Timer objekt
+    private Match match;
+
     @FXML
     public Button switchToTeamSelectButton;
     //timerstyring
@@ -41,8 +44,7 @@ public class MatchController {
     private Timeline timeline;
     //Timeline er en JavaFX-klasse, der bruges til tidsstyrede handlinger(animationer, opdateringer, spil-loops osv.).
 
-    private Timer timer = new Timer(); //opretter Timer objekt
-    private Match match;
+
 
     public void setTeams(Team team1, Team team2) throws IOException {
         this.team1 = team1;
