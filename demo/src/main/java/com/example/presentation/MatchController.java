@@ -182,7 +182,11 @@ public class MatchController {
     private void switchToTeamSelect() throws IOException {
         timeline.pause();
         pauseMatchButton.setVisible(false);
-        resumeMatchButton.setVisible(true);
+        if (!startMatchButton.isVisible()) {
+            resumeMatchButton.setVisible(true);
+            pauseMatchButton.setVisible(false);
+        }
+
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setHeaderText("Vil du returnere til holdvalg?");
