@@ -2,9 +2,6 @@ package com.example;
 
 import java.io.IOException;
 
-import com.example.data.DataLayer;
-
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,12 +15,9 @@ import javafx.stage.Stage;
 public class App extends Application {
     //bruges til første metode
     private static Scene scene;
-    //bruges når vi skal have objektet med
-    private static Stage stage;
 
     @Override
     public void start(Stage stage) throws IOException {
-        //TestStoredProcedure();
         stage.setTitle("Håndbold app");
         Image icon = new Image("/ico.png");
         stage.getIcons().add(icon);
@@ -39,6 +33,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
     }
+
     //sceneskift når der ikke skal information med
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
@@ -49,11 +44,7 @@ public class App extends Application {
         scene.setRoot(root);
     }
 
-
-
     public static void main(String[] args) {
-
         launch();
     }
-
 }

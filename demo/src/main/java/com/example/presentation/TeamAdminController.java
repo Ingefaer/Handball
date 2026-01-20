@@ -5,47 +5,35 @@ import com.example.data.DataLayer;
 import com.example.entities.Team;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class TeamAdminController implements Initializable {
-
-    Team chosenTeam;
-    DataLayer data =  new DataLayer();
+public class TeamAdminController {
+    private Team chosenTeam;
+    private DataLayer data =  new DataLayer();
 
     @FXML
-    public ListView<Team> teamsListView;
+    private ListView<Team> teamsListView;
     @FXML
-    public Button switchToMenuButton, createTeamButton, updateTeamButton, deleteTeamButton;
-    @FXML
-    public TextField createTeamTextField, updateTeamTextField;
+    private TextField createTeamTextField, updateTeamTextField;
 
     @FXML
     private void switchToMenu() throws IOException {
         App.setRoot("menu");
     }
     @FXML
-    public void createTeamOnButtonPressed(ActionEvent actionEvent) {
-        //System.out.println("CreateTeamButtonPressed");
+    private void createTeamOnButtonPressed() {
         String teamName = createTeamTextField.getText();
         Team team =  new Team(teamName);
-        DataLayer data = new DataLayer();
         data.insertTeam(team);
         updateListView();
         createTeamTextField.clear();
 
     }
     @FXML
-    public void updateTeamOnButtonPressed(ActionEvent actionEvent) {
+    private void updateTeamOnButtonPressed() {
         String updateTeamName = updateTeamTextField.getText();
         chosenTeam.setTeamName (updateTeamName);
         data.updateTeam(chosenTeam);
@@ -54,7 +42,7 @@ public class TeamAdminController implements Initializable {
     }
 
     @FXML
-    public void deleteTeamOnButtonPressed(ActionEvent actionEvent) {
+    private void deleteTeamOnButtonPressed() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Confirmation");
         alert.setContentText("Vil du slette det valgte hold: " + chosenTeam.getTeamName());
@@ -66,20 +54,21 @@ public class TeamAdminController implements Initializable {
         updateListView();
     }
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private void initialize() {
+        //Listviewet opdateres her, så der faktisk er et listview når vi kommer ind på siden.
         updateListView();
         // ENTER til opret
-        createTeamTextField.setOnAction(e -> createTeamOnButtonPressed(null));
+        createTeamTextField.setOnAction(e -> createTeamOnButtonPressed());
 
         // ENTER til opdater
-        updateTeamTextField.setOnAction(e -> updateTeamOnButtonPressed(null));
+        updateTeamTextField.setOnAction(e -> updateTeamOnButtonPressed());
 
 
         //Udtrækker data fra det valgte element fra list
         teamsListView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                System.out.println(chosenTeam = newValue);
+                chosenTeam = newValue;
             }
         });
 

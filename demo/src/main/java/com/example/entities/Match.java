@@ -1,7 +1,6 @@
 package com.example.entities;
 
 import java.util.ArrayList;
-import java.util.stream.Collectors;
 
 public class Match {
     private Team team1;
@@ -162,27 +161,6 @@ public class Match {
 
     public String toString(){
         return "Match ID: " + matchID + " team1: " + team1 + " team2: " + team2;
-    }
-
-    public String toCSV() {
-        //TODO: Finde ud af hvordan vi trækker arraylistsne
-        ArrayList<Timestamp> goals1 = goalTeam1;
-        ArrayList<Timestamp> goals2 = goalTeam2;
-        ArrayList<Timestamp> penalty1 = penaltyTeam1;
-        ArrayList<Timestamp> penalty2 = penaltyTeam2;
-
-        String g1 = goals1.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
-        String g2 = goals2.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
-        String p1 = penalty1.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
-        String p2 = penalty2.stream().map(Timestamp::toString).collect(Collectors.joining(";"));
-
-        return matchID + ";" +
-                "\"" + team1.getTeamName() + "\"," +
-                "\"" + g1 + "\"," +
-                "\"" + p1 + "\"," +
-                "\"" + team2.getTeamName() + "\"," +
-                "\"" + g2 + "\"," +
-                "\"" + p2 + "\",";
     }
 
 }

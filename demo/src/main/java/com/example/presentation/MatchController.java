@@ -18,34 +18,29 @@ import javafx.util.Duration;
 import java.io.IOException;
 
 public class MatchController {
-    Team team1;
-    Team team2;
+    private Team team1;
+    private Team team2;
     private Timer timer = new Timer(); //opretter Timer objekt
     private Match match;
 
-    @FXML
-    public Button switchToTeamSelectButton;
     //timerstyring
     @FXML
-    public Label timerLabel;
+    private Label timerLabel;
     @FXML
-    public Button startMatchButton, pauseMatchButton, resumeMatchButton, endMatchButton;
+    private Button startMatchButton, pauseMatchButton, resumeMatchButton, endMatchButton;
     //hold 1 labels og buttons
     @FXML
-    public Label team1Label, goalCounterLabel1, penaltyCounterLabel1;
-    @FXML
-    public Button addGoalButton1, subtractGoalButton1, addPenaltyButton1, subtractPenaltyButton1;
+    private Label team1Label, goalCounterLabel1, penaltyCounterLabel1;
     //hold 2 label og buttons
     @FXML
-    public Label team2Label, goalCounterLabel2, penaltyCounterLabel2;
-    @FXML
-    public Button addGoalButton2, subtractGoalButton2, addPenaltyButton2, subtractPenaltyButton2;
+    private Label team2Label, goalCounterLabel2, penaltyCounterLabel2;
     //Ur
     @FXML
     private Timeline timeline;
     //Timeline er en JavaFX-klasse, der bruges til tidsstyrede handlinger(animationer, opdateringer, spil-loops osv.).
 
-    public void setTeams(Team team1, Team team2) throws IOException {
+    //Bruges i selectTeam controlleren til at overføre to objekter af teams ind i matchControlleren.
+    public void setTeams(Team team1, Team team2) {
         this.team1 = team1;
         this.team2 = team2;
         team1Label.setText(team1.getTeamName());
@@ -55,7 +50,7 @@ public class MatchController {
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         pauseMatchButton.setVisible(false);
         resumeMatchButton.setVisible(false);
         endMatchButton.setVisible(false);
@@ -81,26 +76,26 @@ public class MatchController {
     }
 
     @FXML
-    public void onStartButtonPressed() {
+    private void onStartButtonPressed() {
         timeline.play();
         startMatchButton.setVisible(false);
         pauseMatchButton.setVisible(true);
         endMatchButton.setVisible(true);
     }
     @FXML
-    public void onPauseButtonPressed() {
+    private void onPauseButtonPressed() {
         timeline.pause();
         pauseMatchButton.setVisible(false);
         resumeMatchButton.setVisible(true);
     }
     @FXML
-    public void onResumeButtonPressed() {
+    private void onResumeButtonPressed() {
         timeline.play();
         pauseMatchButton.setVisible(true);
         resumeMatchButton.setVisible(false);
     }
     @FXML
-    public void onEndButtonPressed() throws IOException {
+   private void onEndButtonPressed() throws IOException {
         timeline.pause();
         pauseMatchButton.setVisible(false);
         resumeMatchButton.setVisible(true);
@@ -108,7 +103,6 @@ public class MatchController {
         alert.setTitle("Confirmation");
         alert.setHeaderText("Vil du afslutte kampen?");
         alert.setContentText("Vær sikker på at hele kampen er spillet færdig, da den ikke kan genoptages. Du vil blive returneret til menuen, og kan genfinde rapporten under kamprapporter.");
-        alert.setResizable(true);
         alert.getDialogPane().setPrefHeight(200);
         if (alert.showAndWait().get() == ButtonType.OK) {
             timeline.stop();
@@ -118,49 +112,48 @@ public class MatchController {
     }
 
     @FXML
-    public void addGoalButton1Pressed() throws IOException {
+    private void addGoalButton1Pressed() {
         match.addGoal(team1, new Timestamp(timer));
         goalCounterLabel1.setText(""+match.goalCounter(team1));
     }
 
     @FXML
-    public void subtractGoalButton1Pressed() throws IOException {
+    private void subtractGoalButton1Pressed() {
         match.removeGoal(team1);
         goalCounterLabel1.setText(""+match.goalCounter(team1));
     }
 
     @FXML
-    public void addGoalButton2Pressed() throws IOException {
+    private void addGoalButton2Pressed() {
         match.addGoal(team2, new Timestamp(timer));
         goalCounterLabel2.setText(""+match.goalCounter(team2));
     }
 
     @FXML
-    public void subtractGoalButton2Pressed() throws IOException {
+    private void subtractGoalButton2Pressed() {
         match.removeGoal(team2);
         goalCounterLabel2.setText(""+match.goalCounter(team2));
     }
 
     @FXML
-    public void addPenaltyButton1Pressed() throws IOException {
+    private void addPenaltyButton1Pressed() {
         match.addPenalty(team1, new Timestamp(timer));
         penaltyCounterLabel1.setText(""+match.penaltyCounter(team1));
     }
 
     @FXML
-    public void subtractPenaltyButton1Pressed() throws IOException {
+    private void subtractPenaltyButton1Pressed() {
         match.removePenalty(team1);
         penaltyCounterLabel1.setText(""+match.penaltyCounter(team1));
     }
-
     @FXML
-    public void addPenaltyButton2Pressed() throws IOException {
+    private void addPenaltyButton2Pressed() {
         match.addPenalty(team2, new Timestamp(timer));
         penaltyCounterLabel2.setText(""+match.penaltyCounter(team2));
     }
 
     @FXML
-    public void subtractPenaltyButton2Pressed() throws IOException {
+    private void subtractPenaltyButton2Pressed() {
         match.removePenalty(team2);
         penaltyCounterLabel2.setText(""+match.penaltyCounter(team2));
     }
@@ -191,7 +184,6 @@ public class MatchController {
         alert.setTitle("Confirmation");
         alert.setHeaderText("Vil du returnere til holdvalg?");
         alert.setContentText("Kampen gemmes ikke!");
-        alert.setResizable(true);
         alert.getDialogPane().setPrefHeight(140);
         if (alert.showAndWait().get() == ButtonType.OK) {
             timeline.stop();

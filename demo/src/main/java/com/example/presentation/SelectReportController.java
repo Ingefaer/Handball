@@ -3,53 +3,46 @@ package com.example.presentation;
 import com.example.App;
 import com.example.data.DataLayer;
 import com.example.entities.Match;
-import com.example.entities.Team;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.ResourceBundle;
 
-public class SelectReportController implements Initializable {
-    DataLayer data = new DataLayer();
-    public Button switchToMenuButton;
-    public Button SelectedReportButton;
-    public Label errorLabel;
-    public ListView chooseMatchListView;
+public class SelectReportController {
+    private DataLayer data = new DataLayer();
+    private Match chosenMatch;
 
+    @FXML
+    private Label errorLabel;
+    @FXML
+    private ListView chooseMatchListView;
 
-    Match match;
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    private void initialize() {
         updateListView(chooseMatchListView);
         chooseFromList(chooseMatchListView);
         errorLabel.setVisible(false);
     }
 
     //Metode til at opdatere listview
-    private void updateListView(ListView<Match> list) {
-        match = new Match();
+    private void updateListView(ListView<Match> listview) {
         ArrayList<Match> matches = data.getAllMatches();
         ObservableList<Match> oList = FXCollections.observableArrayList(matches);
-        list.setItems(oList);
+        listview.setItems(oList);
     }
 
-    private void chooseFromList(ListView<Match> list) {
+    private void chooseFromList(ListView<Match> listview) {
         //Udtrækker data fra det valgte element fra list
-        list.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+        listview.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                match = newValue;
-                System.out.println(match);
+                chosenMatch = newValue;
             }
         });
 
@@ -57,7 +50,7 @@ public class SelectReportController implements Initializable {
         //CellFactory er formatering af ListView
         //-> Lambada - lv -> new ListCell<Team>() = formater cellerne i listview istedet for hele listview
         //ListCell er et UI komponent som ListView bruger til at vise hvert komponent
-        list.setCellFactory(lv -> new ListCell<Match>() {
+        listview.setCellFactory(lv -> new ListCell<Match>() {
                     @Override
                     protected void updateItem(Match match, boolean empty) {
                         super.updateItem(match, empty);
@@ -83,13 +76,13 @@ public class SelectReportController implements Initializable {
 
     @FXML
     private void switchToReport() throws IOException {
-        if (match.getMatchID() != 0) {
+        if (chosenMatch != null) {
 
             FXMLLoader loader = new FXMLLoader(App.class.getResource("report.fxml"));
             Parent root = loader.load();
 
             ReportController reportController = loader.getController();
-            reportController.importSelectedMatch(match);
+            reportController.importSelectedMatch(chosenMatch);
 
             App.setRoot(root);
         } else {
